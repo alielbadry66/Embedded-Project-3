@@ -4,6 +4,8 @@
 #include "IntegerToString.h"
 
 
+
+
 #define LCD_Dir DDRD
 #define LCD_Port PORTD
 #define RS_EN_Dir DDRB
@@ -64,19 +66,22 @@ void LCD_Clear() {
     LCD_Command(0x80);
 }
 
-void updateLCD(float temperature, float upperLimit) {
+void updateLCD(float currentTemperature, float targetTemperature) {
     LCD_Clear();
-    LCD_String("Temp: ");
+    LCD_String("Current Temp: ");
+
     char tempStr[16];
-    int temperatureInt = (int)temperature;
+    int temperatureInt = (int)currentTemperature;
     integerToString(temperatureInt, tempStr);
+
     LCD_String(tempStr);
 
     LCD_Command(0xC0);
-    LCD_String("Upper: ");
+    LCD_String("Target Tempr: ");
     
     char upperLimitStr[16];
-    int upperLimitInt = (int)upperLimit;
+    int upperLimitInt = (int)targetTemperature;
     integerToString(upperLimitInt, upperLimitStr);
+
     LCD_String(upperLimitStr);
 }
