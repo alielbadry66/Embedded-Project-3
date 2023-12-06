@@ -1,23 +1,17 @@
-#include "Keypad.h"
+#include "keypad.h"
 #include <avr/io.h>
-
-
-// Define the keypad dimensions
-#define ROWS 4
-#define COLS 4
 
 // Define the keypad pins
 #define KEYPAD_PORT PORTB
 #define KEYPAD_PIN PINB
 #define KEYPAD_DDR DDRB
-// Keypad layout
-char Keypad_Layout[ROWS][COLS] = {
-    {'1', '2', '3', 'A'},
-    {'4', '5', '6', 'B'},
-    {'7', '8', '9', 'C'},
-    {'*', '0', '#', 'D'}
-};
 
+// Define the keypad dimensions
+#define ROWS 4
+#define COLS 4
+
+
+// Function to initialize the keypad
 void Keypad_Init() {
     // Set ROWS as input and enable pull-ups
     KEYPAD_DDR &= ~(0xF0);
@@ -27,7 +21,15 @@ void Keypad_Init() {
     KEYPAD_DDR |= 0x0F;
 }
 
+// Function to read the pressed key
 char Keypad_ReadKey() {
+  char Keypad_Layout[ROWS][COLS] = {
+    {'1', '2', '3'},
+    {'4', '5', '6'},
+    {'7', '8', '9'},
+    {'*', '0', '#'}
+};
+
     for (int col = 0; col < COLS; col++) {
         // Set the current column low
         KEYPAD_PORT &= ~(1 << (col + 4));
