@@ -1,9 +1,10 @@
 #ifndef TEMP_H
 #define TEMP_H
 
-void initializeSystem();
+// Function to initialize the temperature sensor
+void initTemperatureSensor();
+
+// Function to read the temperature from the LM35 sensor
 float readTemperature();
-float getTemperatureInput();
-void displayParameters(float temperature);
 
 #endif
